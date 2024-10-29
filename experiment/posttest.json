@@ -1,39 +1,118 @@
-{
-  "version": 2.0,
+
+  {
+	  "version": 2.0,
   "questions": [
+
     {
-      "question": "This is a Sample Question 1?",
-      "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
-      },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
+        "question": "1. What does the accumulation region in the C-V curve of a PMOS capacitor indicate?",
+        "answers": {
+            "a": "Formation of a depletion layer",
+            "b": "Buildup of majority carriers near the oxide interface",
+            "c": "Presence of minority carriers",
+            "d": "Breakdown of the oxide layer"
+        },
+        "correctAnswer": "b",
+        "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
-      "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
-      },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "c",
-      "difficulty": "beginner"
+        "question": "2. How does temperature affect the threshold voltage (V_T) of a PMOS capacitor?",
+        "answers": {
+            "a": "V_T increases with increasing temperature",
+            "b": "V_T decreases with increasing temperature",
+            "c": "V_T remains unaffected by temperature",
+            "d": "V_T changes unpredictably with temperature"
+        },
+        "correctAnswer": "b",
+        "difficulty": "intermediate"
+    },
+    {
+        "question": "3. In C-V characterization, what is the main purpose of using high-frequency measurements?",
+        "answers": {
+            "a": "To measure the oxide breakdown voltage",
+            "b": "To avoid the response of minority carriers",
+            "c": "To enhance the accumulation capacitance",
+            "d": "To increase the sensitivity of the measurements"
+        },
+        "correctAnswer": "b",
+        "difficulty": "intermediate"
+    },
+    {
+        "question": "4. What happens to the flat-band voltage if the gate material work function is increased?",
+        "answers": {
+            "a": "The flat-band voltage increases",
+            "b": "The flat-band voltage decreases",
+            "c": "The flat-band voltage remains constant",
+            "d": "The flat-band voltage oscillates"
+        },
+        "correctAnswer": "a",
+        "difficulty": "advanced"
+    },
+    {
+        "question": "5. What is the effect of interface trap charges on the C-V curve of a PMOS capacitor?",
+        "answers": {
+            "a": "It causes a shift in the C-V curve",
+            "b": "It increases the oxide capacitance",
+            "c": "It eliminates the inversion region",
+            "d": "It has no effect on the C-V curve"
+        },
+        "correctAnswer": "a",
+        "difficulty": "advanced"
+    },
+    {
+        "question": "6. Which parameter is directly measured from the C-V curve in accumulation?",
+        "answers": {
+            "a": "Threshold voltage",
+            "b": "Oxide capacitance",
+            "c": "Doping concentration",
+            "d": "Flat-band voltage"
+        },
+        "correctAnswer": "b",
+        "difficulty": "beginner"
+    },
+    {
+        "question": "7. What kind of shift in the C-V curve indicates the presence of fixed oxide charges?",
+        "answers": {
+            "a": "A vertical shift",
+            "b": "A horizontal shift",
+            "c": "A narrowing of the curve",
+            "d": "An expansion of the curve"
+        },
+        "correctAnswer": "b",
+        "difficulty": "intermediate"
+    },
+    {
+        "question": "8. In a PMOS C-V characterization, what does a higher inversion capacitance indicate?",
+        "answers": {
+            "a": "A thicker oxide layer",
+            "b": "Higher frequency of measurement",
+            "c": "Higher doping concentration",
+            "d": "A lower flat-band voltage"
+        },
+        "correctAnswer": "c",
+        "difficulty": "intermediate"
+    },
+    {
+        "question": "9. How can one distinguish between mobile ion contamination and interface trap charges in a C-V curve?",
+        "answers": {
+            "a": "By measuring the curve at different temperatures",
+            "b": "By using different gate materials",
+            "c": "By performing C-V measurements at different frequencies",
+            "d": "By varying the oxide thickness"
+        },
+        "correctAnswer": "c",
+        "difficulty": "advanced"
+    },
+    {
+        "question": "10. Why does the inversion capacitance in a PMOS capacitor typically appear smaller than the oxide capacitance?",
+        "answers": {
+            "a": "Because of the series combination of oxide and depletion capacitance",
+            "b": "Due to the accumulation of majority carriers",
+            "c": "Because of a reduced doping concentration",
+            "d": "Due to an increased temperature"
+        },
+        "correctAnswer": "a",
+        "difficulty": "beginner"
     }
+
   ]
 }
