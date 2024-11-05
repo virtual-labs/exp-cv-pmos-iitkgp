@@ -1,10 +1,9 @@
 ## Procedure
-
+<div align="center">
 <img src="images/peq.jpg"  />
-  
-**Fig. 1. MOS C/V curve**
+<p><strong>Fig. 1. MOS C/V curve</strong></p>
+</div>
 
-  
 
 1.  **Set Material Parameters:**
     *   Choose the semiconductor material (Si, Ge, GaAs) for the simulation by clicking on the respective button.
@@ -19,10 +18,10 @@
     *   Set the temperature, _T_, in Kelvin (K).
     *   Input the acceptor doping concentration, _NA_, in 1/cm3.
 4.  **Calculate Energy Bandgap:**
-    *   Use the given formula to calculate the energy bandgap, _Eg_, based on the temperature.
+    *   Use the given formula to calculate the energy bandgap, E<sub>g</sub>, based on the temperature.
 5.  **Submit the Parameters:**
     *   Click the "Submit" button to apply the parameters and perform the simulation.
 6.  **Analyze the Results:**
     *   Observe the _Q-V_ (Charge-Voltage) and _C-V_ (Capacitance-Voltage) plots generated from the simulation.
-    *   Examine key parameters displayed, such as oxide capacitance (_Cox_), threshold voltage (_VT_), flat-band voltage (_Vfb_), and others.
+    *   Examine key parameters displayed, such as oxide capacitance (C<sub>ox</sub>), threshold voltage (V<sub>T</sub>), flat-band voltage (V<sub>fb</sub>), and others.
     *   Interpret the different regions in the C-V curve: accumulation, depletion, and inversion, to understand the behavior of the PMOS capacitor.
