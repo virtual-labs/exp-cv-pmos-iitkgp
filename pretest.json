@@ -1,0 +1,117 @@
+  {
+	  "version": 2.0,
+  "questions": [
+    
+    {
+        "question": "1. What does the C-V characterization of a PMOS capacitor measure?",
+        "answers": {
+            "a": "The current as a function of voltage",
+            "b": "The capacitance as a function of voltage",
+            "c": "The resistance as a function of current",
+            "d": "The power as a function of voltage"
+        },
+        "correctAnswer": "b",
+        "difficulty": "beginner"
+    },
+    {
+        "question": "2. In which region does the capacitance approach the oxide capacitance (C_ox) in a PMOS capacitor?",
+        "answers": {
+            "a": "Accumulation",
+            "b": "Depletion",
+            "c": "Inversion",
+            "d": "Saturation"
+        },
+        "correctAnswer": "a",
+        "difficulty": "intermediate"
+    },
+    {
+        "question": "3. What happens to the capacitance in the depletion region of a PMOS capacitor?",
+        "answers": {
+            "a": "It increases linearly",
+            "b": "It decreases due to the formation of a depletion layer",
+            "c": "It remains constant",
+            "d": "It oscillates with the applied voltage"
+        },
+        "correctAnswer": "b",
+        "difficulty": "beginner"
+    },
+    {
+        "question": "4. What does the threshold voltage (V_T) indicate in the C-V characterization of a PMOS capacitor?",
+        "answers": {
+            "a": "The voltage at which the capacitor begins to conduct current",
+            "b": "The voltage at which significant inversion occurs",
+            "c": "The voltage at which the oxide breaks down",
+            "d": "The voltage at which accumulation starts"
+        },
+        "correctAnswer": "b",
+        "difficulty": "intermediate"
+    },
+    {
+        "question": "5. How does the doping concentration affect the C-V curve of a PMOS capacitor?",
+        "answers": {
+            "a": "It shifts the flat-band voltage",
+            "b": "It has no effect",
+            "c": "It only affects the oxide capacitance",
+            "d": "It changes the metal work function"
+        },
+        "correctAnswer": "a",
+        "difficulty": "advanced"
+    },
+    {
+        "question": "6. What parameter can be extracted from the slope of the C-V curve in the depletion region?",
+        "answers": {
+            "a": "Threshold voltage",
+            "b": "Oxide thickness",
+            "c": "Doping concentration",
+            "d": "Electron mobility"
+        },
+        "correctAnswer": "c",
+        "difficulty": "advanced"
+    },
+    {
+        "question": "7. Which of the following conditions corresponds to the inversion region of a PMOS capacitor?",
+        "answers": {
+            "a": "High negative gate voltage",
+            "b": "High positive gate voltage",
+            "c": "Zero gate voltage",
+            "d": "Any applied voltage"
+        },
+        "correctAnswer": "b",
+        "difficulty": "intermediate"
+    },
+    {
+        "question": "8. What is the significance of the flat-band voltage (V_fb) in C-V characterization?",
+        "answers": {
+            "a": "It indicates the onset of inversion",
+            "b": "It corresponds to the energy band alignment between metal and semiconductor",
+            "c": "It represents the voltage at which the oxide capacitance reaches its maximum",
+            "d": "It determines the breakdown voltage of the oxide"
+        },
+        "correctAnswer": "b",
+        "difficulty": "advanced"
+    },
+    {
+        "question": "9. How is the oxide capacitance (C_ox) related to the oxide thickness (t_ox)?",
+        "answers": {
+            "a": "Directly proportional to t_ox",
+            "b": "Inversely proportional to t_ox",
+            "c": "Independent of t_ox",
+            "d": "Exponential function of t_ox"
+        },
+        "correctAnswer": "b",
+        "difficulty": "beginner"
+    },
+    {
+        "question": "10. In a PMOS capacitor, what type of carriers accumulate at the semiconductor-oxide interface under a high negative gate voltage?",
+        "answers": {
+            "a": "Electrons",
+            "b": "Holes",
+            "c": "Ions",
+            "d": "Photons"
+        },
+        "correctAnswer": "b",
+        "difficulty": "intermediate"
+    }
+
+  ]
+}
