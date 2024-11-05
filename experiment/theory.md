@@ -2,9 +2,10 @@
 **Introduction:**  
 Capacitance-Voltage measurements are an important tool to characterize the gate oxide in detail. They provide information about dopant concentration profile, input and output capacitance of the transistor, gate oxide thickness, dopant density, flat-band voltage, gate oxide quality, and interface charge.
 
+<div align="center">
 <img src="images/tvic.jpg"  />
- 
-**Fig. 1. Capacitance-Voltage measurements setup**
+ <p><strong>Fig. 1. Capacitance-Voltage measurements setup</strong></p>
+</div>
 
   
 
