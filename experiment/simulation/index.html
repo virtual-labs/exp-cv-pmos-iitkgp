@@ -1,13 +1,681 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<!-- Add CSS at the head of HTML file -->
-    <link rel="stylesheet" href="./css/main.css">
-</head>
-<body>
-		<!-- Your code goes here-->
+    <title>C-V Characterization of PMOS Capacitors</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
-</body>
-</html>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/adik.css" rel="stylesheet">
+
+    <!-- jQuery and jQuery UI -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- MathJax and Math.js -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.2.1/math.min.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+
+
+    <!-- Other Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-Knob/1.2.13/jquery.knob.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body><!--body tag start-->
+   
+    <div class="container p-3 my-5 text-left border"><!--3rd Container under body tag start-->
+      <div class="row"><!--First row under 3rd container start-->
+        <div class="col-md-1"></div><!--First col under 3rd container start& end-->
+        <div class="col-md-10"><!--2nd col under 3rd container start-->
+            <p class="text-center bg-success"> <a class="nav-link" data-bs-toggle="tab"  id="instcontrol" style="background-color:#128BD9"  ><span class=" h3 text-dark"> Instructions </span></a>
+              <div id="inst" style="display:block;height:200px;overflow-y:auto;text-align:justify">
+					
+					<!-- INSRTUCTION START -->
+				
+	<ol>
+    
+					
+					<ol>
+        <li>
+            <strong>Select the Semiconductor Material:</strong>
+            <p>
+                Choose the semiconductor material you want to use for the simulation by clicking on one of the 
+                available options: Silicon (Si), Germanium (Ge), or Gallium Arsenide (GaAs).
+            </p>
+        </li>
+        <li>
+            <strong>Input the Metal Gate Work Function (ϕ<sub>m</sub>):</strong>
+            <p>
+                Enter the work function of the metal gate in electron volts (eV). This value affects the flat-band 
+                voltage and overall C-V characteristics of the PMOS capacitor.
+            </p>
+        </li>
+        <li>
+            <strong>Set the Electron Affinity of the Semiconductor (χ<sub>s</sub>):</strong>
+            <p>
+                Provide the electron affinity of the selected semiconductor in eV. This parameter is essential for 
+                calculating the flat-band voltage.
+            </p>
+        </li>
+        <li>
+            <strong>Define Oxide Properties:</strong>
+            <p>
+                Enter the thickness of the oxide layer, <em>t<sub>ox</sub></em>, in nanometers (nm), and specify the 
+                relative permittivity of the oxide, <em>ε<sub>ox</sub></em>.
+            </p>
+        </li>
+        <li>
+            <strong>Specify Semiconductor Parameters:</strong>
+            <ul>
+                <li>Enter the relative permittivity of the semiconductor, <em>ε<sub>semi</sub></em>.</li>
+                <li>Input the effective density of states in the conduction band, <em>N<sub>c</sub></em>, and the 
+                    valence band, <em>N<sub>v</sub></em>, in 1/cm<sup>3</sup>.</li>
+                <li>Set the temperature, <em>T</em>, in Kelvin (K).</li>
+                <li>Provide the acceptor doping concentration, <em>N<sub>A</sub></em>, in 1/cm<sup>3</sup>.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>Calculate the Energy Bandgap (E<sub>g</sub>):</strong>
+            <p>
+                Use the given formula for <em>E<sub>g</sub></em> to compute the energy bandgap based on the input 
+                temperature. This calculation is crucial for determining intrinsic properties of the semiconductor.
+            </p>
+        </li>
+        <li>
+            <strong>Click the "Submit" Button:</strong>
+            <p>
+                Once all the parameters are set, click the "Submit" button to start the simulation. The system will 
+                generate the C-V and Q-V curves based on the input parameters.
+            </p>
+        </li>
+        <li>
+            <strong>Analyze the Simulation Output:</strong>
+            <p>
+                Examine the generated plots: 
+                <ul>
+                    <li><em>Q-V Plot:</em> Shows the relationship between charge (Q) and applied voltage (V).</li>
+                    <li><em>C-V Plot:</em> Displays the capacitance (C) as a function of the applied voltage (V).</li>
+                </ul>
+                Review the calculated parameters such as oxide capacitance (<em>C<sub>ox</sub></em>), threshold voltage 
+                (<em>V<sub>T</sub></em>), flat-band voltage (<em>V<sub>fb</sub></em>), and other relevant characteristics.
+            </p>
+        </li>
+        <li>
+            <strong>Interpret the Results:</strong>
+            <p>
+                Identify different regions of the C-V curve (accumulation, depletion, inversion) and understand their 
+                significance in terms of the PMOS capacitor's behavior. Use these observations to gain insights into 
+                the device's electrical properties.
+            </p>
+        </li>
+    </ol>
+   
+	</ol>
+				<!-- INSTRUCTION STOP -->	
+					
+		   </div>
+            </p> 
+          </div><!--2nd col under 3rd container end-->
+		  
+        <div class="col-md-1"></div><!--3rd col under 3rd container start& end-->
+      </div><!--First row under 3rd container end-->
+    </div><!--3rd Container under body tag end-->
+	
+   <!--simulation start -->
+   <div class="container">
+        <div class="centered-div">
+    <body style="background-color:white" onload="moscap();"><div id="MathJax_Message" style="display: none;"></div>
+
+
+
+<table><tbody><tr><td valign="top" style="background-color:#ededed;">
+
+
+
+
+</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td valign="top">
+
+
+
+
+
+<style>
+h3 {margin-left:1cm}
+</style>
+
+<script type="text/x-mathjax-config;executed=true">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+    tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+  });
+</script>
+
+
+<script language="JavaScript">
+
+var Ev = [];  //valence band energy
+// d arrays used for plotting
+var d1 = [];  //Q-V
+var d2 = [];  //C-V
+
+echarge = 1.60217733E-19;
+kb = 1.380658E-23/echarge;  //eV/K
+
+function moscap() { 
+ tox = eval(data.tox.value)*1E-9;
+ na = 1E6*eval(data.na.value);
+ Nv = 1E6*eval(data.Nv.value);
+ Nc = 1E6*eval(data.Nc.value);
+ T = eval(data.T.value);
+ kBT = 1.380658E-23*T;
+ Eg = eval(data.Eg.value);
+ phi_m = eval(data.phi_m.value);
+ chi_s = eval(data.chi_s.value);
+ document.getElementById('Eg_txt').innerHTML=Eg.toPrecision(3);
+ eps = 8.854187817E-12*eval(data.eps.value);
+ eps_ox = 8.854187817E-12*eval(data.eps_ox.value);
+ ni=Math.sqrt(Nc*Nv*Math.pow(T/300,3))*Math.exp(1.6022E-19*(-Eg)/(2*1.380658E-23*T));
+ document.getElementById('ni_txt').innerHTML=(ni/1E6).toPrecision(3);
+ Ev0 = kb*T*Math.log(na/Nv); //valence band far from the oxide
+ phi_s = chi_s + Eg + Ev0; // work function of semiconductor 
+ document.getElementById('phi_s_txt').innerHTML=(phi_s).toPrecision(3);
+ Vfb = phi_m  - phi_s; // flat band voltage
+ document.getElementById('Vfb_txt').innerHTML=(Vfb).toPrecision(3);
+ VT = 2*tox*Math.sqrt(eps*na*1.380658E-23*T*Math.log(na/ni))/eps_ox+2*kb*T*Math.log(na/ni);  //threshold voltage in depletion approximation
+ document.getElementById('VT_txt').innerHTML=(VT+Vfb).toPrecision(3);
+ xp = 2*Math.sqrt(eps*kb*T*Math.log(na/ni)/(echarge*na)); // maximum depletion width in depletion approximation
+ cox= eps_ox/tox;
+ document.getElementById('cox_txt').innerHTML=(cox).toPrecision(3);
+ 
+
+/* Integrate the Poisson equation for a negative initial electric field and various starting positions xm
+*/
+  d1.length = 0;
+  d2.length = 0;
+  n = 0;
+  for (j=0; j<300; j++) {
+    xm = 2.1*xp - (j*2/300)*xp;
+    Ev = Ev0;
+    dEvdx = -1E3;
+    dx = xm/300;
+    for (i=0; i<301; i++) { //numerical integration using the midpoint method
+      x = xm*(1-i/300);
+      Ev_mid = Ev - dEvdx*dx/2;  //Ev at the midpoint
+      rho_mid = -na - Nc*Math.exp(-(Eg+Ev_mid)/(kb*T)) + Nv*Math.exp(Ev_mid/(kb*T));
+      dEvdx_mid = dEvdx - echarge*rho_mid*0.5*dx/eps;
+      Ev = Ev - dEvdx_mid*dx;
+      dEvdx = dEvdx - echarge*rho_mid*dx/eps;
+    }
+    Vs = Ev0 - Ev;
+    Es = dEvdx;
+    Eox = Es*eps/eps_ox;
+    Vtmp = Vs + Eox*tox;
+    Q = -Es*eps; //the charge on the semiconductor
+    V = Vtmp + phi_m - phi_s;
+    if ((-Ev > kBT)&(Eg+Ev > kBT)) { // Boltzmann condition is satisfied
+      d1[n] = [V,-Q]; n++;
+    }
+  } // end j
+
+/* Integrate the Poisson equation for a positive initial electric field and various starting positions xm
+*/
+  for (j=0; j<301; j++) {
+    xm = (0.1+j*2/300)*xp;
+    Ev = Ev0;
+    dEvdx = 2E3;
+    dx = xm/300;
+    for (i=0; i<301; i++) { //numerical integration using the midpoint method
+      x = xm*(1-i/300);
+      Ev_mid = Ev - dEvdx*dx/2;  //Ev at the midpoint
+      rho_mid = -na - Nc*Math.exp(-(Eg+Ev_mid)/(kb*T)) + Nv*Math.exp(Ev_mid/(kb*T));
+      dEvdx_mid = dEvdx - echarge*rho_mid*0.5*dx/eps;
+      Ev = Ev - dEvdx_mid*dx;
+      dEvdx = dEvdx - echarge*rho_mid*dx/eps;
+    }
+    Vs = Ev0 - Ev;
+    Es = dEvdx;
+    Eox = Es*eps/eps_ox;
+    Vtmp = Vs + Eox*tox;
+    Q = -Es*eps; //the charge on the semiconductor
+    V = Vtmp + phi_m - phi_s;
+    if ((-Ev < kBT)|(Eg+Ev < kBT)) { break;} // Boltzmann condition is violated
+    d1[n] = [V,-Q]; n++;
+  } // end j
+
+
+  //calculate the capacitance
+  for (j=1; j<n-1; j++) {
+    d2[j] = [d1[j][0],(d1[j+1][1]-d1[j-1][1])/(d1[j+1][0]-d1[j-1][0])]; 
+  }
+
+
+// plot Q - V
+    var data1 = [{data: d1, color: "rgb(0,0,0)", shadowSize:0, lines: {show:true}}]; 
+    $.plot($("#placeholder1"), data1);
+
+// plot C - V
+    var data2 = [{data: d2, color: "rgb(0,0,0)", shadowSize:0, lines: {show:true}}]; 
+    $.plot($("#placeholder2"), data2);
+
+
+}
+
+</script>
+
+
+<style>
+p {margin-left:1cm; margin-right:1cm;}
+p.t {margin-left:0cm; margin-right:0cm;}
+h2 {margin-left:1cm;}
+</style>
+
+  
+  
+<!-- 
+<p>In capacitance-voltage profiling, the capacitance of a MOS capacitor is measured as a function of the bias voltage. The app below solves the Poisson equation to determine the charge-voltage and capacitance voltage characteristics of a MOS capacitor with a p-type substrate. This is the low-frequency result. At high frequencies, the charge at the oxide interface does not change fast enough and the characteristics take on another form. </p>
+ -->
+<form name="data">
+<table style="border-collapse:collapse" align="center">
+<tbody>
+
+<tr>
+    <td>
+        <p class="t" style="text-align:right">
+            <span class="MathJax_Preview" style="display:none;"></span>
+            <span id="MathJax-Element-1-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" role="presentation" style="font-size: 101%; position: relative;">
+              <!--   <span class="mjx-math" aria-hidden="true">
+                    <span class="mjx-msubsup">
+                        <span class="mjx-base">
+                            <span class="mjx-mi">ϕ</span>
+                        </span>
+                        <span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em;">
+                            <span class="mjx-mi">m</span>
+                        </span>
+                    </span>
+                </span> -->
+                <span class="MJX_Assistive_MathML" role="presentation">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>ϕ</mi><mi>m</mi></msub></math>
+                </span>
+            </span>
+            <script type="math/tex" id="MathJax-Element-1">\phi_m</script>
+            &nbsp;= &nbsp;
+            <input type="text" name="phi_m" size="10" value="4.08" spellcheck="false" data-ms-editor="true">
+        </p>
+    </td>
+    <td>eV</td>
+
+    <td>
+        <p class="t" style="text-align:right">
+            <span class="MathJax_Preview" style="display:none;"></span>
+            <span id="MathJax-Element-2-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" role="presentation" style="font-size: 101%; position: relative;">
+                <!-- <span class="mjx-math" aria-hidden="true">
+                    <span class="mjx-msubsup">
+                        <span class="mjx-base">
+                            <span class="mjx-mi">χ</span>
+                        </span>
+                        <span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em;">
+                            <span class="mjx-mi">s</span>
+                        </span>
+                    </span>
+                </span> -->
+                <span class="MJX_Assistive_MathML" role="presentation">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>χ</mi><mi>s</mi></msub></math>
+                </span>
+            </span>
+            <script type="math/tex" id="MathJax-Element-2">\chi_s</script>
+            &nbsp;= &nbsp;
+            <input type="text" name="chi_s" size="10" value="4.05" spellcheck="false" data-ms-editor="true">
+        </p>
+    </td>
+    <td>eV</td>
+</tr>
+
+<tr>
+    <td>
+        <p class="t" style="text-align:right">
+            <span class="MathJax_Preview" style="display:none;"></span>
+            <span class="mjx-chtml MathJax_CHTML" tabindex="0" role="presentation" style="font-size: 101%; position: relative;">
+               <!--  <span class="mjx-math" aria-hidden="true">
+                    <span class="mjx-msubsup">
+                        <span class="mjx-base"><span class="mjx-mi">t</span></span>
+                        <span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em;">
+                            <span class="mjx-mrow"><span class="mjx-mi">o</span><span class="mjx-mi">x</span></span>
+                        </span>
+                    </span>
+                </span> -->
+                <span class="MJX_Assistive_MathML" role="presentation">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>t</mi><mrow class="MJX-TeXAtom-ORD"><mi>o</mi><mi>x</mi></mrow></msub></math>
+                </span>
+            </span>
+            <script type="math/tex" id="MathJax-Element-3">t_{ox}</script>
+            &nbsp;= &nbsp;<input type="text" name="tox" size="10" value="3" spellcheck="false" data-ms-editor="true">
+        </p>
+    </td>
+    <td>nm</td>
+
+    <td>
+        <p class="t" style="text-align:right">
+            <span class="MathJax_Preview" style="display:none;"></span>
+            <span class="mjx-chtml MathJax_CHTML" tabindex="0" role="presentation" style="font-size: 101%; position: relative;">
+                <!-- <span class="mjx-math" aria-hidden="true">
+                    <span class="mjx-msubsup">
+                        <span class="mjx-base"><span class="mjx-mi">ϵ</span></span>
+                        <span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em;">
+                            <span class="mjx-mrow"><span class="mjx-mi">o</span><span class="mjx-mi">x</span></span>
+                        </span>
+                    </span>
+                </span> -->
+                <span class="MJX_Assistive_MathML" role="presentation">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>ϵ</mi><mrow class="MJX-TeXAtom-ORD"><mi>o</mi><mi>x</mi></mrow></msub></math>
+                </span>
+            </span>
+            <script type="math/tex" id="MathJax-Element-4">\epsilon_{ox}</script>
+            &nbsp;= &nbsp;<input type="text" name="eps_ox" size="10" value="4" spellcheck="false" data-ms-editor="true">
+        </p>
+    </td>
+    <td></td>
+
+    <td>
+        <p class="t" style="text-align:right">
+            <span class="MathJax_Preview" style="display:none;"></span>
+            <span class="mjx-chtml MathJax_CHTML" tabindex="0" role="presentation" style="font-size: 101%; position: relative;">
+                <!-- <span class="mjx-math" aria-hidden="true">
+                    <span class="mjx-msubsup">
+                        <span class="mjx-base"><span class="mjx-mi">N</span></span>
+                        <span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em;"><span class="mjx-mi">c</span></span>
+                    </span>
+                    <span class="mjx-mo">(</span><span class="mjx-mn">300</span><span class="mjx-mo">)</span>
+                </span> -->
+                <span class="MJX_Assistive_MathML" role="presentation">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>N</mi><mi>c</mi></msub><mo>(</mo><mn>300</mn><mo>)</mo></math>
+                </span>
+            </span>
+            <script type="math/tex" id="MathJax-Element-5">N_c(300)</script>
+            &nbsp;= &nbsp;<input type="text" name="Nc" size="10" value="2.78E19" spellcheck="false" data-ms-editor="true">
+        </p>
+    </td>
+    <td>1/cm³</td>
+
+    <td>
+        <p class="t" style="text-align:right">
+            <span class="MathJax_Preview" style="display:none;"></span>
+            <span class="mjx-chtml MathJax_CHTML" tabindex="0" role="presentation" style="font-size: 101%; position: relative;">
+                <!-- <span class="mjx-math" aria-hidden="true">
+                    <span class="mjx-mi">T</span>
+                </span> -->
+                <span class="MJX_Assistive_MathML" role="presentation">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>T</mi></math>
+                </span>
+            </span>
+            <script type="math/tex" id="MathJax-Element-6">T</script>
+            &nbsp;= &nbsp;<input type="text" name="T" size="10" value="300" spellcheck="false" data-ms-editor="true">
+        </p>
+    </td>
+    <td>K</td>
+</tr>
+
+
+<tr>
+<td>
+    <p class="t" style="text-align: right;">
+        <span class="MathJax" style="font-size: 101%;">\( E_g \)</span> = 
+        <input type="text" name="Eg" size="25" value="1.166 - 4.73E-4*T*T/(T+636)" spellcheck="false">
+    </p>
+</td>
+<td> eV</td>
+
+<td>
+    <p class="t" style="text-align: right;">
+        <span class="MathJax" style="font-size: 101%;">\( \epsilon_{semi} \)</span> = 
+        <input type="text" name="eps" size="10" value="12" spellcheck="false">
+    </p>
+</td>
+<td></td>
+
+<td>
+    <p class="t" style="text-align: right;">
+        <span class="MathJax" style="font-size: 101%;">\( N_v(300) \)</span> = 
+        <input type="text" name="Nv" size="10" value="9.84E18" spellcheck="false">
+    </p>
+</td>
+<td>1/cm³</td>
+
+<td>
+    <p class="t" style="text-align: right;">
+        <span class="MathJax" style="font-size: 101%;">\( N_A \)</span> = 
+        <input type="text" name="na" size="10" value="1E17" spellcheck="false">
+    </p>
+</td>
+<td>1/cm³</td>
+
+</tr>
+
+</tbody></table>
+
+<table style="border-collapse:collapse" align="center">
+<tbody><tr>
+<td><p style="text-align:center"><input type="button" value="Submit" onclick="moscap();">  <input type="button" value=" Si " onclick="data.Nc.value=&#39;2.78E19&#39;; data.Nv.value=&#39;9.84E18&#39;; data.chi_s.value=&#39;4.05&#39;; data.Eg.value=&#39;1.166-4.73E-4*T*T/(T+636)&#39;; moscap();">
+<input type="button" value=" Ge " onclick="data.Nc.value=&#39;1.04E19&#39;; data.Nv.value=&#39;6.0E18&#39;; data.chi_s.value=&#39;4.0&#39;; data.Eg.value=&#39;0.7437-4.77E-4*T*T/(T+235)&#39;; moscap();">
+<input type="button" value="GaAs" onclick="data.Nc.value=&#39;4.45E17&#39;; data.Nv.value=&#39;7.72E18&#39;; data.chi_s.value=&#39;4.07&#39;; data.Eg.value=&#39;1.519-5.41E-4*T*T/(T+204)&#39;; moscap();"></p></td>
+
+</tr>
+</tbody></table> 
+</form>
+
+<table align="center"><tbody><tr>
+<td>
+    <p style="text-align: center;"><b>Q - V</b></p>
+    <table align="center">
+        <tbody>
+            <tr>
+                <td>
+                    <p style="text-align: center;">
+                        <span id="MathJax-Element-11-Frame" class="mjx-chtml MathJax_CHTML" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>Q</mi></math>" style="font-size: 101%;">Q [C/m²]</span>
+                    </p>
+                </td>
+                <td>
+                    <div id="placeholder1" style="width: 400px; height: 300px; position: relative;">
+                        <canvas class="flot-base" width="400" height="300" style="position: absolute; width: 400px; height: 300px;"></canvas>
+                        <div class="flot-text" style="position: absolute; inset: 0; font-size: smaller; color: rgb(84, 84, 84);">
+                            <div class="flot-x-axis flot-x1-axis" style="display: block;">
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 282px; left: 31px;">-1.25</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 282px; left: 84px;">-1.00</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 282px; left: 137px;">-0.75</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 282px; left: 190px;">-0.50</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 282px; left: 243px;">-0.25</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 282px; left: 298px;">0.00</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 282px; left: 351px;">0.25</div>
+                            </div>
+                            <div class="flot-y-axis flot-y1-axis" style="display: block;">
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 269px; left: 2px;">-0.003</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 235px; left: 2px;">-0.002</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 202px; left: 2px;">-0.001</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 168px; left: 6px;">0.000</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 135px; left: 6px;">0.001</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 101px; left: 6px;">0.002</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 67px; left: 6px;">0.003</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 34px; left: 6px;">0.004</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 0px; left: 6px;">0.005</div>
+                            </div>
+                        </div>
+                        <canvas class="flot-overlay" width="400" height="300" style="position: absolute; width: 400px; height: 300px;"></canvas>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <p style="text-align: center;">
+                        <span id="MathJax-Element-12-Frame" class="mjx-chtml MathJax_CHTML" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>V</mi></math>" style="font-size: 101%;">V [V]</span>
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</td>
+
+<td>
+
+<p style="text-align:center"><b>C - V</b></p>
+<table align="center"><tbody>
+<tr>
+<td>
+    <p style="text-align: center;">
+        <span id="MathJax-Element-13-Frame" class="mjx-chtml MathJax_CHTML" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>C</mi></math>" style="font-size: 101%;">C [F/m²]</span>
+    </p>
+</td>
+<td>
+    <div id="placeholder2" style="width: 400px; height: 300px; position: relative;">
+        <canvas class="flot-base" width="400" height="300" style="position: absolute; width: 400px; height: 300px;"></canvas>
+        <div class="flot-text" style="position: absolute; inset: 0; font-size: smaller; color: #545454;">
+            <div class="flot-x-axis flot-x1-axis" style="display: block;">
+                <div class="flot-tick-label tickLabel" style="position: absolute; top: 282px; left: 74px;">-1.00</div>
+                <div class="flot-tick-label tickLabel" style="position: absolute; top: 282px; left: 134px;">-0.75</div>
+                <div class="flot-tick-label tickLabel" style="position: absolute; top: 282px; left: 194px;">-0.50</div>
+                <div class="flot-tick-label tickLabel" style="position: absolute; top: 282px; left: 254px;">-0.25</div>
+                <div class="flot-tick-label tickLabel" style="position: absolute; top: 282px; left: 316px;">0.00</div>
+            </div>
+            <div class="flot-y-axis flot-y1-axis" style="display: block;">
+                <div class="flot-tick-label tickLabel" style="position: absolute; top: 269px; left: 2px;">0.000</div>
+                <div class="flot-tick-label tickLabel" style="position: absolute; top: 215px; left: 2px;">0.002</div>
+                <div class="flot-tick-label tickLabel" style="position: absolute; top: 161px; left: 2px;">0.004</div>
+                <div class="flot-tick-label tickLabel" style="position: absolute; top: 108px; left: 2px;">0.006</div>
+                <div class="flot-tick-label tickLabel" style="position: absolute; top: 54px; left: 2px;">0.008</div>
+                <div class="flot-tick-label tickLabel" style="position: absolute; top: 0px; left: 2px;">0.010</div>
+            </div>
+        </div>
+        <canvas class="flot-overlay" width="400" height="300" style="position: absolute; width: 400px; height: 300px;"></canvas>
+    </div>
+</td>
+
+<tr>
+<td></td>
+<td>
+    <p style="text-align: center;">
+        <span id="MathJax-Element-14-Frame" class="mjx-chtml MathJax_CHTML" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>V</mi></math>" style="font-size: 101%;">V [V]</span>
+    </p>
+</td>
+
+</tr>
+</tbody></table>
+
+</td></tr></tbody></table>
+
+<table align="center"><tbody>
+<tr>
+ <td>
+    <p style="margin-left: 1cm;">
+        <!-- Display MathJax element and text value -->
+        <span id="MathJax-Element-15" type="math/tex">E<sub>g</sub> =</span>
+        <span id="Eg_txt">1.12</span>&nbsp;eV
+    </p>
+</td>
+
+  <td>
+    <p style="margin-left: 1cm;">
+        <!-- MathJax renders the equation, and plain text displays the value -->
+        <span id="MathJax-Element-16" type="math/tex">n<sub>i</sub> =</span>
+        <span id="ni_txt">6.40 &times; 10<sup>9</sup></span>&nbsp;1/cm³
+    </p>
+</td>
+
+  <td>
+    <p style="margin-left: 1cm;">
+        <!-- Display MathJax element and text value -->
+        <span id="MathJax-Element-17" type="math/tex">ϕ<sub>s</sub> =</span>
+        <span id="phi_s_txt">5.05</span>&nbsp;eV
+    </p>
+</td>
+
+<td>
+    <p style="margin-left: 1cm;">
+        <!-- Display MathJax element and text value -->
+        <span id="MathJax-Element-18" type="math/tex">V<sub>fb</sub> = ϕ<sub>m</sub> - ϕ<sub>s</sub> =</span>
+        <span id="Vfb_txt">-0.972</span>&nbsp;V
+    </p>
+</td>
+
+</tr>
+
+<tr>
+<td>
+    <p style="margin-left: 1cm;">
+        <span id="MathJax-Element-19-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" role="presentation">
+            <span id="MJXc-Node-113" class="mjx-math" aria-hidden="true">
+                <span class="mjx-msubsup">
+                    <span class="mjx-base">
+                        <span class="mjx-mi">C<sub>ox</sub></span>
+                    </span>
+                    <span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em;">
+                        
+                    </span>
+                </span>
+                <span class="mjx-mo">=</span>
+                <span class="mjx-mfrac">
+                    <span class="mjx-numerator">
+                        <span class="mjx-msubsup">
+                            <span class="mjx-mi">ϵ<sub>ox</sub></span>
+                            
+                        </span>
+                    </span>
+                    <span class="mjx-denominator">
+                        <span class="mjx-msubsup">
+                            <span class="mjx-mi">t<sub>ox</sub></span>
+                            
+                        </span>
+                    </span>
+                </span>
+                <span class="mjx-mo">=</span>
+            </span>
+            <script type="math/tex">C_{\text{ox}}=\frac{\epsilon_{\text{ox}}}{t_{\text{ox}}}=</script>
+            <span id="cox_txt">0.0118</span>&nbsp;F/m²
+        </span>
+    </p>
+</td>
+<td>
+    <p style="margin-left: 1cm;">
+        <span id="MathJax-Element-20-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" role="presentation">
+            <span class="mjx-math" aria-hidden="true">
+                <span class="mjx-msubsup">
+                    <span class="mjx-base">
+                        <span class="mjx-mi">V<sub>T</sub></span>
+                    </span>
+                    
+                </span>
+                <span class="mjx-mo">=</span>
+            </span>
+            <script type="math/tex">V<sub>T</sub>=</script>
+            <span id="VT_txt">0.0292</span>&nbsp;V
+        </span>
+    </p>
+</td>
+
+</tr>
+</tbody></table>
+
+
+
+
+
+</td></tr></tbody></table>
+
+</div>
+</div>
+   <!--simulation end -->
+   
+</body><!--body tag end-->
+</html><!--html tag end-->
