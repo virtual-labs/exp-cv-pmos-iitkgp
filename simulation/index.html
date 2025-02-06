@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>C-V Characterization of PMOS Capacitors</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/adik.css" rel="stylesheet">
+
+    <!-- jQuery and jQuery UI -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- MathJax and Math.js -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.2.1/math.min.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+
+
+    <!-- Other Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-Knob/1.2.13/jquery.knob.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <!-- Custom CSS -->
+    <style>
+        .form-container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container input[type="button"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-container input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+        .result-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .plot-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body><!--body tag start-->
+   
+    <div class="container p-3 my-5 text-left border"><!--3rd Container under body tag start-->
+      <div class="row"><!--First row under 3rd container start-->
+        <div class="col-md-1"></div><!--First col under 3rd container start& end-->
+        <div class="col-md-10"><!--2nd col under 3rd container start-->
+            <p class="text-center bg-success"> <a class="nav-link" data-bs-toggle="tab"  id="instcontrol" style="background-color:#128BD9"  ><span class=" h3 text-dark"> Instructions </span></a>
+              <div id="inst" style="display:block;height:200px;overflow-y:auto;text-align:justify">
+					
+					<!-- INSRTUCTION START -->
+				
+	<ol>
+    
+					
+					<ol>
+        <li>
+            <strong>Select the Semiconductor Material:</strong>
+            <p>
+                Choose the semiconductor material you want to use for the simulation by clicking on one of the 
+                available options: Silicon (Si), Germanium (Ge), or Gallium Arsenide (GaAs).
+            </p>
+        </li>
+        <li>
+            <strong>Input the Metal Gate Work Function (ϕ<sub>m</sub>):</strong>
+            <p>
+                Enter the work function of the metal gate in electron volts (eV). This value affects the flat-band 
+                voltage and overall C-V characteristics of the PMOS capacitor.
+            </p>
+        </li>
+        <li>
+            <strong>Set the Electron Affinity of the Semiconductor (χ<sub>s</sub>):</strong>
+            <p>
+                Provide the electron affinity of the selected semiconductor in eV. This parameter is essential for 
+                calculating the flat-band voltage.
+            </p>
+        </li>
+        <li>
+            <strong>Define Oxide Properties:</strong>
+            <p>
+                Enter the thickness of the oxide layer, <em>t<sub>ox</sub></em>, in nanometers (nm), and specify the 
+                relative permittivity of the oxide, <em>ε<sub>ox</sub></em>.
+            </p>
+        </li>
+        <li>
+            <strong>Specify Semiconductor Parameters:</strong>
+            <ul>
+                <li>Enter the relative permittivity of the semiconductor, <em>ε<sub>semi</sub></em>.</li>
+                <li>Input the effective density of states in the conduction band, <em>N<sub>c</sub></em>, and the 
+                    valence band, <em>N<sub>v</sub></em>, in 1/cm<sup>3</sup>.</li>
+                <li>Set the temperature, <em>T</em>, in Kelvin (K).</li>
+                <li>Provide the acceptor doping concentration, <em>N<sub>A</sub></em>, in 1/cm<sup>3</sup>.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>Calculate the Energy Bandgap (E<sub>g</sub>):</strong>
+            <p>
+                Use the given formula for <em>E<sub>g</sub></em> to compute the energy bandgap based on the input 
+                temperature. This calculation is crucial for determining intrinsic properties of the semiconductor.
+            </p>
+        </li>
+        <li>
+            <strong>Click the "Submit" Button:</strong>
+            <p>
+                Once all the parameters are set, click the "Submit" button to start the simulation. The system will 
+                generate the C-V and Q-V curves based on the input parameters.
+            </p>
+        </li>
+        <li>
+            <strong>Analyze the Simulation Output:</strong>
+            <p>
+                Examine the generated plots: 
+                <ul>
+                    
+                    <li><em>C-V Plot:</em> Displays the capacitance (C) as a function of the applied voltage (V).</li>
+                </ul>
+                Review the calculated parameters such as oxide capacitance (<em>C<sub>ox</sub></em>), threshold voltage 
+                (<em>V<sub>T</sub></em>), flat-band voltage (<em>V<sub>fb</sub></em>), and other relevant characteristics.
+            </p>
+        </li>
+        <li>
+            <strong>Interpret the Results:</strong>
+            <p>
+                Identify different regions of the C-V curve (accumulation, depletion, inversion) and understand their 
+                significance in terms of the PMOS capacitor's behavior. Use these observations to gain insights into 
+                the device's electrical properties.
+            </p>
+        </li>
+    </ol>
+   
+	</ol>
+				<!-- INSTRUCTION STOP -->	
+					
+		   </div>
+            </p> 
+          </div><!--2nd col under 3rd container end-->
+		  
+        <div class="col-md-1"></div><!--3rd col under 3rd container start& end-->
+      </div><!--First row under 3rd container end-->
+    </div><!--3rd Container under body tag end-->
+	
+   <!--simulation start -->
+   <div class="container">
+        <div class="centered-div">
+    <body style="background-color:white" onload="moscap();"><div id="MathJax_Message" style="display: none;"></div>
+
+
+
+<table><tbody><tr><td valign="top" style="background-color:#ededed;">
+
+
+
+
+</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td valign="top">
+
+
+
+
+
+<style>
+h3 {margin-left:1cm}
+</style>
+
+<script type="text/x-mathjax-config;executed=true">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+    tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+  });
+</script>
+
+
+<script language="JavaScript">
+
+var Ev = [];  //valence band energy
+// d arrays used for plotting
+var d1 = [];  //Q-V
+var d2 = [];  //C-V
+
+echarge = 1.60217733E-19;
+kb = 1.380658E-23/echarge;  //eV/K
+
+function moscap() { 
+ tox = eval(data.tox.value)*1E-9;
+ na = 1E6*eval(data.na.value);
+ Nv = 1E6*eval(data.Nv.value);
+ Nc = 1E6*eval(data.Nc.value);
+ T = eval(data.T.value);
+ kBT = 1.380658E-23*T;
+ Eg = eval(data.Eg.value);
+ phi_m = eval(data.phi_m.value);
+ chi_s = eval(data.chi_s.value);
+ document.getElementById('Eg_txt').innerHTML=Eg.toPrecision(3);
+ eps = 8.854187817E-12*eval(data.eps.value);
+ eps_ox = 8.854187817E-12*eval(data.eps_ox.value);
+ ni=Math.sqrt(Nc*Nv*Math.pow(T/300,3))*Math.exp(1.6022E-19*(-Eg)/(2*1.380658E-23*T));
+ document.getElementById('ni_txt').innerHTML=(ni/1E6).toPrecision(3);
+ Ev0 = kb*T*Math.log(na/Nv); //valence band far from the oxide
+ phi_s = chi_s + Eg + Ev0; // work function of semiconductor 
+ document.getElementById('phi_s_txt').innerHTML=(phi_s).toPrecision(3);
+ Vfb = phi_m  - phi_s; // flat band voltage
+ document.getElementById('Vfb_txt').innerHTML=(Vfb).toPrecision(3);
+ VT = 2*tox*Math.sqrt(eps*na*1.380658E-23*T*Math.log(na/ni))/eps_ox+2*kb*T*Math.log(na/ni);  //threshold voltage in depletion approximation
+ document.getElementById('VT_txt').innerHTML=(VT+Vfb).toPrecision(3);
+ xp = 2*Math.sqrt(eps*kb*T*Math.log(na/ni)/(echarge*na)); // maximum depletion width in depletion approximation
+ cox= eps_ox/tox;
+ document.getElementById('cox_txt').innerHTML=(cox).toPrecision(3);
+ 
+
+/* Integrate the Poisson equation for a negative initial electric field and various starting positions xm
+*/
+  d1.length = 0;
+  d2.length = 0;
+  n = 0;
+  for (j=0; j<300; j++) {
+    xm = 2.1*xp - (j*2/300)*xp;
+    Ev = Ev0;
+    dEvdx = -1E3;
+    dx = xm/300;
+    for (i=0; i<301; i++) { //numerical integration using the midpoint method
+      x = xm*(1-i/300);
+      Ev_mid = Ev - dEvdx*dx/2;  //Ev at the midpoint
+      rho_mid = -na - Nc*Math.exp(-(Eg+Ev_mid)/(kb*T)) + Nv*Math.exp(Ev_mid/(kb*T));
+      dEvdx_mid = dEvdx - echarge*rho_mid*0.5*dx/eps;
+      Ev = Ev - dEvdx_mid*dx;
+      dEvdx = dEvdx - echarge*rho_mid*dx/eps;
+    }
+    Vs = Ev0 - Ev;
+    Es = dEvdx;
+    Eox = Es*eps/eps_ox;
+    Vtmp = Vs + Eox*tox;
+    Q = -Es*eps; //the charge on the semiconductor
+    V = Vtmp + phi_m - phi_s;
+    if ((-Ev > kBT)&(Eg+Ev > kBT)) { // Boltzmann condition is satisfied
+      d1[n] = [V,-Q]; n++;
+    }
+  } // end j
+
+/* Integrate the Poisson equation for a positive initial electric field and various starting positions xm
+*/
+  for (j=0; j<301; j++) {
+    xm = (0.1+j*2/300)*xp;
+    Ev = Ev0;
+    dEvdx = 2E3;
+    dx = xm/300;
+    for (i=0; i<301; i++) { //numerical integration using the midpoint method
+      x = xm*(1-i/300);
+      Ev_mid = Ev - dEvdx*dx/2;  //Ev at the midpoint
+      rho_mid = -na - Nc*Math.exp(-(Eg+Ev_mid)/(kb*T)) + Nv*Math.exp(Ev_mid/(kb*T));
+      dEvdx_mid = dEvdx - echarge*rho_mid*0.5*dx/eps;
+      Ev = Ev - dEvdx_mid*dx;
+      dEvdx = dEvdx - echarge*rho_mid*dx/eps;
+    }
+    Vs = Ev0 - Ev;
+    Es = dEvdx;
+    Eox = Es*eps/eps_ox;
+    Vtmp = Vs + Eox*tox;
+    Q = -Es*eps; //the charge on the semiconductor
+    V = Vtmp + phi_m - phi_s;
+    if ((-Ev < kBT)|(Eg+Ev < kBT)) { break;} // Boltzmann condition is violated
+    d1[n] = [V,-Q]; n++;
+  } // end j
+
+
+  //calculate the capacitance
+  for (j=1; j<n-1; j++) {
+    d2[j] = [d1[j][0],(d1[j+1][1]-d1[j-1][1])/(d1[j+1][0]-d1[j-1][0])]; 
+  }
+
+
+
+
+// plot C - V
+var options = {
+    series: {
+        lines: { show: true, lineWidth: 3 },  
+        points: { show: true, radius: 4 }  
+    },
+    colors: ["#007BFF"],  
+    grid: {
+        borderWidth: 1,
+        borderColor: "#ccc",
+        hoverable: true,  // Enable hover detection
+        backgroundColor: { colors: ["#fff", "#f9f9f9"] }  
+    },
+    xaxis: {
+        tickColor: "#ddd",
+        tickLength: 5,
+        axisLabel: "V [V]",
+        axisLabelUseCanvas: true,
+        axisLabelFontSizePixels: 14,
+        axisLabelFontFamily: 'Arial, sans-serif',
+        axisLabelPadding: 10
+    },
+    yaxis: {
+        tickColor: "#ddd",
+        tickLength: 5,
+        axisLabel: "C [F/m²]",
+        axisLabelUseCanvas: true,
+        axisLabelFontSizePixels: 14,
+        axisLabelFontFamily: 'Arial, sans-serif',
+        axisLabelPadding: 10
+    }
+};
+
+// Plot the graph
+var data2 = [{ data: d2, color: "#007BFF", shadowSize: 0, lines: { show: true, lineWidth: 3 }, points: { show: true, radius: 4 } }];
+$.plot($("#placeholder2"), data2, options);
+
+// Tooltip Functionality
+$("<div id='tooltip'></div>").css({
+    position: "absolute",
+    display: "none",
+    border: "1px solid #ccc",
+    padding: "6px",
+    "background-color": "#fff",
+    "border-radius": "5px",
+    "box-shadow": "2px 2px 10px rgba(0,0,0,0.1)"
+}).appendTo("body");
+
+$("#placeholder2").bind("plothover", function (event, pos, item) {
+    if (item) {
+        $("#tooltip").html("V: " + item.datapoint[0].toFixed(2) + " V<br>C: " + item.datapoint[1].toExponential(3) + " F/m²")
+            .css({ top: item.pageY + 10, left: item.pageX + 10 })
+            .fadeIn(200);
+    } else {
+        $("#tooltip").hide();
+    }
+});
+
+
+
+}
+
+</script>
+
+
+<style>
+p {margin-left:1cm; margin-right:1cm;}
+p.t {margin-left:0cm; margin-right:0cm;}
+h2 {margin-left:1cm;}
+</style>
+
+  
+  
+<!-- 
+<p>In capacitance-voltage profiling, the capacitance of a MOS capacitor is measured as a function of the bias voltage. The app below solves the Poisson equation to determine the charge-voltage and capacitance voltage characteristics of a MOS capacitor with a p-type substrate. This is the low-frequency result. At high frequencies, the charge at the oxide interface does not change fast enough and the characteristics take on another form. </p>
+ -->
+<form name="data">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="form-container">
+                    
+                    <form name="data">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="phi_m">\(\phi_m\)</label>
+                                    <input type="text" name="phi_m" value="4.08">
+                                </div>
+                                <div class="form-group">
+                                    <label for="tox">\(t_{ox}\)</label>
+                                    <input type="text" name="tox" value="3">
+                                </div>
+                                <div class="form-group">
+                                    <label for="eps_ox">\(\epsilon_{ox}\)</label>
+                                    <input type="text" name="eps_ox" value="4">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Nc">\(N_c(300)\)</label>
+                                    <input type="text" name="Nc" value="2.78E19">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="chi_s">\(\chi_s\)</label>
+                                    <input type="text" name="chi_s" value="4.05">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Eg">\(E_g\)</label>
+                                    <input type="text" name="Eg" value="1.166 - 4.73E-4*T*T/(T+636)">
+                                </div>
+                                <div class="form-group">
+                                    <label for="eps">\(\epsilon_{semi}\)</label>
+                                    <input type="text" name="eps" value="12">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Nv">\(N_v(300)\)</label>
+                                    <input type="text" name="Nv" value="9.84E18">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="na">\(N_A\)</label>
+                                    <input type="text" name="na" value="1E17">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="T">\(T\)</label>
+                                    <input type="text" name="T" value="300">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <input type="button" value="Submit" onclick="moscap();" class="btn btn-primary">
+                            <input type="button" value="Si" onclick="setMaterial('Si');" class="btn btn-secondary">
+                            <input type="button" value="Ge" onclick="setMaterial('Ge');" class="btn btn-secondary">
+                            <input type="button" value="GaAs" onclick="setMaterial('GaAs');" class="btn btn-secondary">
+                        </div>
+                    </form>
+                </div>
+
+            
+                <div class="plot-container" style="position: relative;">
+                    <h4 class="text-center mb-4">C-V Plot</h4>
+                    <div id="placeholder2" style="width: 100%; height: 300px; position: relative;"></div>
+                    <p style="text-align: center;"></p>
+                
+                    <!-- Left-center label -->
+                    <div style="position: absolute; top: 50%; left: -25px; transform: rotate(-90deg) translateY(-50%); white-space: nowrap;">
+                        C [F/m²]
+                    </div>
+                
+                    <!-- Bottom-center label -->
+                    <div style="text-align: center; margin-top: 5px;">
+                        V [V]
+                    </div>
+                </div>
+                
+       
+                   
+                
+            </div>
+        </div>
+    </div>
+
+    <script language="JavaScript">
+        // Your existing JavaScript code for moscap() and other functions goes here
+        // ...
+
+        function setMaterial(material) {
+            if (material === 'Si') {
+                data.Nc.value = '2.78E19';
+                data.Nv.value = '9.84E18';
+                data.chi_s.value = '4.05';
+                data.Eg.value = '1.166 - 4.73E-4*T*T/(T+636)';
+            } else if (material === 'Ge') {
+                data.Nc.value = '1.04E19';
+                data.Nv.value = '6.0E18';
+                data.chi_s.value = '4.0';
+                data.Eg.value = '0.7437 - 4.77E-4*T*T/(T+235)';
+            } else if (material === 'GaAs') {
+                data.Nc.value = '4.45E17';
+                data.Nv.value = '7.72E18';
+                data.chi_s.value = '4.07';
+                data.Eg.value = '1.519 - 5.41E-4*T*T/(T+204)';
+            }
+            moscap();
+        }
+    </script>
+
+
+</form>
+
+
+
+<table align="center"><tbody>
+<tr>
+ <td>
+    <p style="margin-left: 1cm;">
+        <!-- Display MathJax element and text value -->
+        <span id="MathJax-Element-15" type="math/tex">E<sub>g</sub> =</span>
+        <span id="Eg_txt">1.12</span>&nbsp;eV
+    </p>
+</td>
+
+  <td>
+    <p style="margin-left: 1cm;">
+        <!-- MathJax renders the equation, and plain text displays the value -->
+        <span id="MathJax-Element-16" type="math/tex">n<sub>i</sub> =</span>
+        <span id="ni_txt">6.40 &times; 10<sup>9</sup></span>&nbsp;1/cm³
+    </p>
+</td>
+
+  <td>
+    <p style="margin-left: 1cm;">
+        <!-- Display MathJax element and text value -->
+        <span id="MathJax-Element-17" type="math/tex">ϕ<sub>s</sub> =</span>
+        <span id="phi_s_txt">5.05</span>&nbsp;eV
+    </p>
+</td>
+
+<td>
+    <p style="margin-left: 1cm;">
+        <!-- Display MathJax element and text value -->
+        <span id="MathJax-Element-18" type="math/tex">V<sub>fb</sub> = ϕ<sub>m</sub> - ϕ<sub>s</sub> =</span>
+        <span id="Vfb_txt">-0.972</span>&nbsp;V
+    </p>
+</td>
+
+</tr>
+
+<tr>
+<td>
+    <p style="margin-left: 1cm;">
+        <span id="MathJax-Element-19-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" role="presentation">
+            <span id="MJXc-Node-113" class="mjx-math" aria-hidden="true">
+                <span class="mjx-msubsup">
+                    <span class="mjx-base">
+                        <span class="mjx-mi">C<sub>ox</sub></span>
+                    </span>
+                    <span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.212em;">
+                        
+                    </span>
+                </span>
+                <span class="mjx-mo">=</span>
+                <span class="mjx-mfrac">
+                    <span class="mjx-numerator">
+                        <span class="mjx-msubsup">
+                            <span class="mjx-mi">ϵ<sub>ox</sub></span>
+                            
+                        </span>
+                    </span>
+                    <span class="mjx-denominator">
+                        <span class="mjx-msubsup">
+                            <span class="mjx-mi">t<sub>ox</sub></span>
+                            
+                        </span>
+                    </span>
+                </span>
+                <span class="mjx-mo">=</span>
+            </span>
+            <script type="math/tex">C_{\text{ox}}=\frac{\epsilon_{\text{ox}}}{t_{\text{ox}}}=</script>
+            <span id="cox_txt">0.0118</span>&nbsp;F/m²
+        </span>
+    </p>
+</td>
+<td>
+    <p style="margin-left: 1cm;">
+        <span id="MathJax-Element-20-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" role="presentation">
+            <span class="mjx-math" aria-hidden="true">
+                <span class="mjx-msubsup">
+                    <span class="mjx-base">
+                        <span class="mjx-mi">V<sub>T</sub></span>
+                    </span>
+                    
+                </span>
+                <span class="mjx-mo">=</span>
+            </span>
+            <script type="math/tex">V<sub>T</sub>=</script>
+            <span id="VT_txt">0.0292</span>&nbsp;V
+        </span>
+    </p>
+</td>
+
+</tr>
+</tbody></table>
+
+
+
+
+
+</td></tr></tbody></table>
+
+</div>
+</div>
+   <!--simulation end -->
+   
+<script src="../assets/js/iframeResize.js"></script>
+        
+        </body><!--body tag end-->
+</html><!--html tag end-->
